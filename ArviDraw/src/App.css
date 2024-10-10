@@ -1,0 +1,22 @@
+#root{
+  margin: 0;
+  padding: 0;
+  background-color: #252525;
+  height: 100vh;
+  width: 100vw;
+  min-height: fit-content;
+}
+
+.canvas-box{
+  height: 85vh;
+}
+
+.logo{
+  height: 30px;
+}
+
+.adjust{
+  width: 100px;
+  min-width: fit-content;
+  background-color: #91989f;
+}
