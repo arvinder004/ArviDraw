@@ -46,8 +46,8 @@ const App = () => {
           ArviDraw
         </h1>
       </div>
-      <div className='d-flex gap-1 align-items-center justify-content-around '>
-        <div className='p-2 d-flex flex-column align-items-center gap-3 rounded adjust'>
+      <div className='d-flex flex-column flex-md-row gap-1 align-items-center justify-content-around'>
+        <div className='rounded adjust'>
 
           <div className="d-flex gap-3 align-items-center">
             <label htmlFor="pencil"><img src='./images/pencil.svg' alt="" className='logo' /></label>
@@ -80,7 +80,7 @@ const App = () => {
 
         </div>
 
-        <div className='col-md-10 border border-2 canvas-box'>
+        <div className='col-12 col-md-10 border border-2 canvas-box'>
           <Board
             canvasRef={canvasRef}
             ctxRef={ctxRef}
@@ -91,7 +91,7 @@ const App = () => {
           />
         </div>
       </div>
-      <footer className="text-center text-light fixed-bottom mb-1">
+      <footer className="text-center text-light mb-1">
         Designed and Developed by Arvinder.
       </footer>
     </>

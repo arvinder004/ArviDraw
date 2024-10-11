@@ -1,5 +1,6 @@
 import rough from 'roughjs';
 import { useEffect, useState, useLayoutEffect } from "react";
+import '../App.css'
 
 const roughGenerator = rough.generator();
 
@@ -23,6 +24,21 @@ const Board = ({ canvasRef, ctxRef, elements, setElements, tool, color }) => {
         ctxRef.current.strokeStyle = color;
     }, [color]);
 
+    useEffect(() => {
+        const resizeCanvas = () => {
+            const canvas = canvasRef.current;
+            if (canvas) {
+                canvas.width = window.innerWidth * 1; 
+                canvas.height = window.innerHeight * 0.85; 
+            }
+        };
+    
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+    
+        return () => window.removeEventListener('resize', resizeCanvas);
+    }, []);    
+
     useLayoutEffect(() => {
         const roughCanvas = rough.canvas(canvasRef.current);
 
@@ -41,8 +57,10 @@ const Board = ({ canvasRef, ctxRef, elements, setElements, tool, color }) => {
         });
     }, [elements])
 
-    const handleMouseDown = (e) => {
-        const { offsetX, offsetY } = e.nativeEvent;
+    // Handles for both mouse and touch start
+    const handlePointerDown = (e) => {
+        e.preventDefault();
+        const { offsetX, offsetY } = getPointerPosition(e);
 
         if (tool == "pencil") {
             setElements((prevElements) => [
@@ -83,8 +101,11 @@ const Board = ({ canvasRef, ctxRef, elements, setElements, tool, color }) => {
         setIsDrawing(true);
     }
 
-    const handleMouseMove = (e) => {
-        const { offsetX, offsetY } = e.nativeEvent;
+    // Handles for both mouse and touch move
+    const handlePointerMove = (e) => {
+        e.preventDefault();
+        const { offsetX, offsetY } = getPointerPosition(e);
+
         if (isDrawing) {
             if (tool == "pencil") {
                 const { path } = elements[elements.length - 1];
@@ -112,9 +133,9 @@ const Board = ({ canvasRef, ctxRef, elements, setElements, tool, color }) => {
                     }
                 }))
             } else if (tool == "rect") {
-                setElements((prevElements) => prevElements.map((ele, index)=>{
-                    if(index == elements.length - 1){
-                        return{
+                setElements((prevElements) => prevElements.map((ele, index)=> {
+                    if (index == elements.length - 1) {
+                        return {
                             ...ele,
                             width: offsetX - ele.offsetX,
                             height: offsetY - ele.offsetY,
@@ -127,23 +148,43 @@ const Board = ({ canvasRef, ctxRef, elements, setElements, tool, color }) => {
         }
     }
 
-    const handleMouseUp = (e) =>{
+    // Handles for both mouse and touch end
+    const handlePointerUp = (e) => {
+        e.preventDefault();
         setIsDrawing(false);
     }
 
+    // Function to get pointer position for both mouse and touch events
+    const getPointerPosition = (e) => {
+        const canvas = canvasRef.current;
+        let offsetX, offsetY;
+
+        if (e.touches) {
+            const touch = e.touches[0];
+            const boundingRect = canvas.getBoundingClientRect();
+            offsetX = touch.clientX - boundingRect.left;
+            offsetY = touch.clientY - boundingRect.top;
+        } else {
+            offsetX = e.nativeEvent.offsetX;
+            offsetY = e.nativeEvent.offsetY;
+        }
+        return { offsetX, offsetY };
+    }
 
     return (
         <>
             <div 
-                onMouseDown={handleMouseDown}
-                onMouseMove={handleMouseMove}
-                onMouseUp={handleMouseUp} 
-                className='h-100 w-100 border border-dark border-3 overflow-hidden'>
+                onMouseDown={handlePointerDown}
+                onMouseMove={handlePointerMove}
+                onMouseUp={handlePointerUp}
+                onTouchStart={handlePointerDown}
+                onTouchMove={handlePointerMove}
+                onTouchEnd={handlePointerUp}
+                className='h-100 w-100 border border-dark border-3 overflow-hidden canvas'>
                 <canvas ref={canvasRef} />
             </div>
         </>
     )
-
 }
 
 export default Board;
