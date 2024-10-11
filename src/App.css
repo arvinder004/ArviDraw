@@ -68,6 +68,7 @@ footer {
   color: #ffffff;
   text-align: center;
   font-size: 1.5rem;
+  
 }
 
 .adjust {
@@ -118,7 +119,9 @@ footer {
 
   .canvas-box {
     height: 75vh;
+    overflow: hidden;
   }
+
 
   .logo {
     width: 20px;

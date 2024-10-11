@@ -80,7 +80,7 @@ const App = () => {
 
         </div>
 
-        <div className='col-12 col-md-10 border border-2 canvas-box'>
+        <div className='col-12 col-md-10 border border-2 canvas-box overflow-hidden'>
           <Board
             canvasRef={canvasRef}
             ctxRef={ctxRef}

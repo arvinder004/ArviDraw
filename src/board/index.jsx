@@ -7,6 +7,8 @@ const roughGenerator = rough.generator();
 const Board = ({ canvasRef, ctxRef, elements, setElements, tool, color }) => {
     const [isDrawing, setIsDrawing] = useState(false);
 
+    canvasRef?document.body.style.overflow = "hidden":document.body.style.overflow = "auto"; // to avoid scrolling of the page while drawing on mobile
+
     useEffect(() => {
         const canvas = canvasRef.current;
         canvas.height = window.innerHeight * 2;
