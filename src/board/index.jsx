@@ -337,6 +337,8 @@ const Board = ({ canvasRef, ctxRef, elements, setElements, tool, color }) => {
                 roughCanvas.draw(roughGenerator.rectangle(element.offsetX, element.offsetY, element.width, element.height, { roughness: 0, stroke: element.stroke, strokeWidth: 3 }))
             } else if (element.type == "circle") {
                 roughCanvas.draw(roughGenerator.circle(element.offsetX, element.offsetY, element.radius, {roughness:0, stroke:element.stroke, strokeWidth:3}));
+            } else if (element.type == "eraser") {
+                roughCanvas.linearPath(element.path, { roughness:0, stroke:element.stroke, strokeWidth:5 });
             }
         });
     }, [elements])
@@ -385,11 +387,22 @@ const Board = ({ canvasRef, ctxRef, elements, setElements, tool, color }) => {
             setElements((prevElements)=>[
                 ...prevElements,
                 {
-                    type:"cirle",
+                    type: "cirle",
                     offsetX,
                     offsetY,
                     radius: 0,
-                    stroke:color,
+                    stroke: color,
+                }
+            ])
+        } else if (tool == "eraser"){
+            setElements((prevElements)=>[
+                ...prevElements,
+                {
+                    type: "eraser",
+                    offsetX,
+                    offsetY,
+                    path: [[offsetX, offsetY]],
+                    stroke: '#343a40'
                 }
             ])
         }
@@ -448,6 +461,19 @@ const Board = ({ canvasRef, ctxRef, elements, setElements, tool, color }) => {
                             ...ele,
                             radius,
                         };
+                    } else {
+                        return ele;
+                    }
+                }))
+            } else if (tool == "eraser"){
+                const { path } = elements[elements.length - 1];
+                const newPath = [...path, [offsetX, offsetY]];
+                setElements((prevElements) => prevElements.map((ele, index) => {
+                    if (index == elements.length - 1) {
+                        return {
+                            ...ele,
+                            path: newPath,
+                        }
                     } else {
                         return ele;
                     }
