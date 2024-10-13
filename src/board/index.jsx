@@ -335,6 +335,8 @@ const Board = ({ canvasRef, ctxRef, elements, setElements, tool, color }) => {
                 roughCanvas.draw(roughGenerator.line(element.offsetX, element.offsetY, element.width, element.height, { roughness: 0, stroke: element.stroke, strokeWidth: 3 }));
             } else if (element.type == "rect") {
                 roughCanvas.draw(roughGenerator.rectangle(element.offsetX, element.offsetY, element.width, element.height, { roughness: 0, stroke: element.stroke, strokeWidth: 3 }))
+            } else if (element.type == "circle") {
+                roughCanvas.draw(roughGenerator.circle(element.offsetX, element.offsetY, element.radius, {roughness:0, stroke:element.stroke, strokeWidth:3}));
             }
         });
     }, [elements])
@@ -379,6 +381,17 @@ const Board = ({ canvasRef, ctxRef, elements, setElements, tool, color }) => {
                     stroke: color,
                 }
             ])
+        } else if (tool == "circle"){
+            setElements((prevElements)=>[
+                ...prevElements,
+                {
+                    type:"cirle",
+                    offsetX,
+                    offsetY,
+                    radius: 0,
+                    stroke:color,
+                }
+            ])
         }
         setIsDrawing(true);
     }
@@ -421,6 +434,19 @@ const Board = ({ canvasRef, ctxRef, elements, setElements, tool, color }) => {
                             ...ele,
                             width: offsetX - ele.offsetX,
                             height: offsetY - ele.offsetY,
+                        };
+                    } else {
+                        return ele;
+                    }
+                }))
+            } else if(tool == "circle"){
+                const radius = Math.sqrt(Math.pow(offsetX - elements[elements.length - 1].offsetX, 2) +
+                                         Math.pow(offsetY - elements[elements.length - 1].offsetY, 2));
+                setElements((prevElements) => prevElements.map((ele, index)=> {
+                    if (index == elements.length - 1) {
+                        return {
+                            ...ele,
+                            radius,
                         };
                     } else {
                         return ele;
