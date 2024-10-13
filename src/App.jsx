@@ -49,6 +49,17 @@ const App = () => {
         </h1>
       </div>
       <div className='d-flex flex-column align-items-center justify-content-center '>
+
+        <div className='border border-1 canvas-box'>
+          <Board
+            canvasRef={canvasRef}
+            ctxRef={ctxRef}
+            elements={elements}
+            setElements={setElements}
+            color={color}
+            tool={tool}
+          />
+        </div>
         <div className='p-1 m-2 d-flex align-items-center justify-content-center gap-3 rounded adjust'>
 
           <div className="d-flex gap-3 align-items-center">
@@ -90,17 +101,6 @@ const App = () => {
             <button className='btn btn-danger btn-lg' onClick={handleClearCanvas}>Clear Canvas</button>
           </div>
 
-        </div>
-
-        <div className='col-md-10 border border-2 canvas-box'>
-          <Board
-            canvasRef={canvasRef}
-            ctxRef={ctxRef}
-            elements={elements}
-            setElements={setElements}
-            color={color}
-            tool={tool}
-          />
         </div>
       </div>
       <footer className="text-center text-light fixed-bottom mb-1">
