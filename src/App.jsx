@@ -77,10 +77,10 @@ const App = () => {
             <input type="radio" className="radio-input" name="tool" id="rect" value="rect" checked={tool == "rect"} onChange={(e) => setTool(e.target.value)} />
           </div>
           
-          <div className="d-flex gap-3 align-items-center">
+          {/* <div className="d-flex gap-3 align-items-center">
             <label htmlFor="circle"><img src='./images/circle.svg' alt="" className='logo' /></label>
             <input type="radio" className="radio-input" name="tool" id="circle" value="circle" checked={tool == "circle"} onChange={(e) => setTool(e.target.value)} />
-          </div>
+          </div> */}
           
           <div className="d-flex gap-3 align-items-center">
             <label htmlFor="eraser"><img src='./images/eraser.svg' alt="" className='logo' /></label>
