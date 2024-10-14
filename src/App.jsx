@@ -50,7 +50,7 @@ const App = () => {
       </div>
       <div className='d-flex flex-column align-items-center justify-content-center '>
 
-        <div className='border border-1 canvas-box'>
+        <div className='border border-1 canvas-box fix'>
           <Board
             canvasRef={canvasRef}
             ctxRef={ctxRef}

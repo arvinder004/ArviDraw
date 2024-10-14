@@ -8,6 +8,8 @@
   width: 100vw;
   min-height: fit-content;
   max-width: fit-content;
+  max-height: 100vh;
+  overflow: hidden;
 }
 
 .head h1 {
@@ -41,6 +43,11 @@
 }
 
 @media (max-width: 768px) {
+
+  #root{
+    max-height: 100vh;
+    overflow: hidden;
+  }
 
   #pencil {
     grid-area: pencil;
