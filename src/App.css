@@ -21,8 +21,9 @@
   height: 78vh;
 }
 
-.logo {
+.logo, #color{
   height: 25px;
+  cursor: pointer;
 }
 
 .adjust {
