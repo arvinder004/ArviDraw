@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
-#root{
+#root {
   margin: 0;
   padding: 0;
   background-color: #343a40;
@@ -16,22 +16,81 @@
   font-style: normal;
 }
 
-.canvas-box{
+.canvas-box {
   width: 100vw;
   height: 78vh;
 }
 
-.logo{
+.logo {
   height: 25px;
 }
 
-.adjust{
+.adjust {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
   max-height: fit-content;
   max-width: fit-content;
   background-color: #91989f;
 }
 
-.radio-input{
+.radio-input {
   display: none;
 }
 
+@media (max-width: 768px) {
+
+  #pencil {
+    grid-area: pencil;
+  }
+
+  #line {
+    grid-area: line;
+  }
+
+  #rect {
+    grid-area: rect;
+  }
+
+  #eraser {
+    grid-area: eraser;
+  }
+
+  #color {
+    grid-area: color;
+  }
+
+  #undo {
+    grid-area: undo;
+  }
+
+  #redo {
+    grid-area: redo;
+  }
+
+  #clear {
+    grid-area: clear;
+  }
+
+  .canvas-box {
+    width: 95%;
+    height: 70vh;
+  }
+
+  .logo{
+    margin: 0;
+    padding: 0;
+  }
+
+  .adjust {
+    max-width: fit-content;
+    height: 20vh;
+    display: grid;
+    grid-template-areas: 'pencil line rect eraser'
+      'color undo redo clear'
+      'color undo redo clear';
+    
+
+  }
+}

@@ -306,20 +306,20 @@ const Board = ({ canvasRef, ctxRef, elements, setElements, tool, color }) => {
         ctxRef.current.strokeStyle = color;
     }, [color]);
 
-    // useEffect(() => {
-    //     const resizeCanvas = () => {
-    //         const canvas = canvasRef.current;
-    //         if (canvas) {
-    //             canvas.width = window.innerWidth * 0.8; // Adjust width to 80% of screen width
-    //             canvas.height = window.innerHeight * 0.6; // Adjust height to 60% of screen height
-    //         }
-    //     };
+    useEffect(() => {
+        const resizeCanvas = () => {
+            const canvas = canvasRef.current;
+            if (canvas) {
+                canvas.width = window.innerWidth * 2; // Adjust width to 80% of screen width
+                canvas.height = window.innerHeight * 2; // Adjust height to 60% of screen height
+            }
+        };
     
-    //     window.addEventListener('resize', resizeCanvas);
-    //     resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
     
-    //     return () => window.removeEventListener('resize', resizeCanvas);
-    // }, []);    
+        return () => window.removeEventListener('resize', resizeCanvas);
+    }, []);    
 
     useLayoutEffect(() => {
         const roughCanvas = rough.canvas(canvasRef.current);

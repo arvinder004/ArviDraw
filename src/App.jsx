@@ -60,19 +60,19 @@ const App = () => {
             tool={tool}
           />
         </div>
-        <div className='p-1 m-2 d-flex align-items-center justify-content-center gap-3 rounded adjust'>
+        <div className='p-1 m-2 rounded adjust'>
 
-          <div className="d-flex gap-3 align-items-center">
+          <div className="d-flex align-items-center">
             <label htmlFor="pencil"><img src='./images/pencil.svg' alt="" className='logo' /></label>
             <input type="radio" className="radio-input" name="tool" id="pencil" value="pencil" checked={tool == "pencil"} onChange={(e) => setTool(e.target.value)} />
           </div>
 
-          <div className="d-flex gap-3 align-items-center">
+          <div className="d-flex align-items-center">
             <label htmlFor="line"><img src='./images/line.svg' alt="" className='logo' /></label>
             <input type="radio" className="radio-input" name="tool" id="line" value="line" checked={tool == "line"} onChange={(e) => setTool(e.target.value)}  />
           </div>
 
-          <div className="d-flex gap-3 align-items-center">
+          <div className="d-flex align-items-center">
             <label htmlFor="rect"><img src='./images/rect.svg' alt="" className='logo' /></label>
             <input type="radio" className="radio-input" name="tool" id="rect" value="rect" checked={tool == "rect"} onChange={(e) => setTool(e.target.value)} />
           </div>
@@ -82,7 +82,7 @@ const App = () => {
             <input type="radio" className="radio-input" name="tool" id="circle" value="circle" checked={tool == "circle"} onChange={(e) => setTool(e.target.value)} />
           </div> */}
           
-          <div className="d-flex gap-3 align-items-center">
+          <div className="d-flex align-items-center">
             <label htmlFor="eraser"><img src='./images/eraser.svg' alt="" className='logo' /></label>
             <input type="radio" className="radio-input" name="tool" id="eraser" value="eraser" checked={tool == "eraser"} onChange={(e) => setTool(e.target.value)} />
           </div>
@@ -93,12 +93,12 @@ const App = () => {
           </div>
 
           <div className='d-flex gap-2 align-items-center'>
-            <button className='btn btn-info ' disabled={elements.length == 0} onClick={undo}>Undo</button>
-            <button className='btn btn-outline-info' disabled={history.length < 1} onClick={redo}>Redo</button>
+            <button className='btn btn-info ' id='undo' disabled={elements.length == 0} onClick={undo}>Undo</button>
+            <button className='btn btn-outline-info' id='redo' disabled={history.length < 1} onClick={redo}>Redo</button>
           </div>
 
           <div>
-            <button className='btn btn-danger btn-lg' onClick={handleClearCanvas}>Clear Canvas</button>
+            <button className='btn btn-danger btn-lg' id='clear' onClick={handleClearCanvas}>Clear Canvas</button>
           </div>
 
         </div>
