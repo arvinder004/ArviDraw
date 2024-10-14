@@ -21,6 +21,7 @@
 .canvas-box {
   width: 100vw;
   height: 78vh;
+  cursor: pointer;
 }
 
 .logo, #color{
